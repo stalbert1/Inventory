@@ -28,6 +28,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         //generateTest()
         attemptFetch(filter: "")
         
+        if fetchedResultsContoller.fetchedObjects?.count == 0 {
+            //Nothing in database need to load from CSV file
+            loadCoreDataWithCsvFile()
+        }
+        //print("number of ogjects fetched is...\(fetchedResultsContoller.fetchedObjects!.count)")
+        
     }
     
     @IBAction func dismissPressed(_ sender: Any) {
@@ -197,6 +203,50 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         //default:
         //
         }
+    }
+    
+    func loadCoreDataWithCsvFile() {
+        
+        //NOTE the I in Inventory
+        let contents = readDataFromFile(file: "partsInventory")
+        if let line = contents?.components(separatedBy: "\n") {
+            
+            //used this to disallow the header (without the count -1 it goes out range
+            for i in 1..<line.count - 1 {
+                let indData = line[i].components(separatedBy: ",")
+                //print("loop number...\(i)")
+                //indData represents an individual part
+                print("\(indData[0]), \(indData[1]), \(indData[2]), \(indData[3])")
+                //Model Name, Part Description, Part Number, Comments
+                let part = Part(context: context)
+                //part = Part(context: context)
+                part.partDescription = indData[1]
+                part.partNumber = indData[2]
+                part.modelName = indData[0]
+                part.comments = indData[3]
+                part.quantity = 0
+                ad.saveContext()
+            }
+        }
+    }
+    
+    //this will return the contents of the file.  Now need to parse the text
+    func readDataFromFile(file:String) -> String! {
+        
+        let myBundle = Bundle.main
+        guard let filepath = myBundle.path(forResource: file, ofType: "csv")
+            else {
+                return nil
+        }
+        
+        do {
+            let contents = try String(contentsOfFile: filepath)
+            return contents
+        } catch {
+            print("File Read Error for file \(filepath)")
+            return nil
+        }
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

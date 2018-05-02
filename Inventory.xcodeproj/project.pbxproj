@@ -17,6 +17,7 @@
 		3443D11E1E588E820033F864 /* Part+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D11C1E588E820033F864 /* Part+CoreDataClass.swift */; };
 		3443D11F1E588E820033F864 /* Part+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D11D1E588E820033F864 /* Part+CoreDataProperties.swift */; };
 		3443D1211E589CF30033F864 /* PartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D1201E589CF30033F864 /* PartCell.swift */; };
+		CF0A4276209937A4000EEDB4 /* partsInventory.csv in Resources */ = {isa = PBXBuildFile; fileRef = CF0A4275209937A4000EEDB4 /* partsInventory.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		3443D11C1E588E820033F864 /* Part+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Part+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3443D11D1E588E820033F864 /* Part+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Part+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3443D1201E589CF30033F864 /* PartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCell.swift; sourceTree = "<group>"; };
+		CF0A4275209937A4000EEDB4 /* partsInventory.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = partsInventory.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				340E2BB31E569FBA002C4E1F /* AppDelegate.swift */,
 				340E2BBD1E569FBA002C4E1F /* Assets.xcassets */,
 				340E2BC21E569FBA002C4E1F /* Info.plist */,
+				CF0A4275209937A4000EEDB4 /* partsInventory.csv */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF0A4276209937A4000EEDB4 /* partsInventory.csv in Resources */,
 				340E2BC11E569FBA002C4E1F /* LaunchScreen.storyboard in Resources */,
 				340E2BBE1E569FBA002C4E1F /* Assets.xcassets in Resources */,
 				340E2BB91E569FBA002C4E1F /* Main.storyboard in Resources */,
