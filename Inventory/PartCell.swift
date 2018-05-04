@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class PartCell: UITableViewCell {
+class PartCell: SwipeTableViewCell {
 
     @IBOutlet weak var lblModelName: UILabel!
     @IBOutlet weak var lblPartDescription: UILabel!

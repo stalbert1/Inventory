@@ -8,14 +8,17 @@
 
 import UIKit
 import CoreData
+import SwipeCellKit
 
 //imported core data and added protocol for nsfetchedresultscontroller delegate
 
-class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
+class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate, UISearchBarDelegate, SwipeTableViewCellDelegate {
 
     //key point is the 3 labels in the cell are connected to the view and not the view controller
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     
     var fetchedResultsContoller: NSFetchedResultsController<Part>!
     
@@ -40,10 +43,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         self.view.endEditing(true)
         
     }
-    //used this to dismiss the keyboard from uitextfield when pressing the view
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
     
     //MARK: - table view setup
     
@@ -60,6 +59,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PartCell", for: indexPath) as! PartCell
         configureCell(cell: cell, indexPath: indexPath as NSIndexPath)
+        cell.delegate = self
         return cell
     }
     
@@ -80,20 +80,90 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     }
     //End Boiler plate code
     
+    //SwipeTableCellCode
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        guard orientation == .right else { return nil }
+        
+        let updateAction = SwipeAction(style: .default, title: "Edit") { action, indexPath in
+            // handle action by updating model with deletion
+            print("update Action Called")
+            //, was once keyword where
+            //making sure there are items in the table view.
+            if let objs = self.fetchedResultsContoller.fetchedObjects, objs.count > 0 {
+                let part = objs[indexPath.row]
+                //sending the part object to the Part VC
+                self.performSegue(withIdentifier: "PartsDetail", sender: part)
+            }
+        }
+        
+        let copyPartNumAction = SwipeAction(style: .default, title: "Copy Part#") {action, indexPath in
+            
+            if let objs = self.fetchedResultsContoller.fetchedObjects, objs.count > 0 {
+                let part = objs[indexPath.row]
+                
+                //print("copy part number only, which is... \(part.partNumber!)")
+                UIPasteboard.general.string = part.partNumber!
+            }
+            
+        }
+        
+        let copyPartInfoAction = SwipeAction(style: .default, title: "Copy Part Desc") {action, indexPath in
+            
+            if let objs = self.fetchedResultsContoller.fetchedObjects, objs.count > 0 {
+                let part = objs[indexPath.row]
+                
+                UIPasteboard.general.string = "The part number for the \(part.partDescription!) for the \(part.modelName!) is \(part.partNumber!)"
+            }
+            
+        }
+        
+        // customize the action appearance
+        copyPartInfoAction.backgroundColor = UIColor(red: 0.498, green: 0.498, blue: 0.498, alpha: 1.00)
+        //only stays while its pressed
+        //copyPartInfoAction.highlightedBackgroundColor = UIColor.cyan
+        copyPartInfoAction.hidesWhenSelected = true
+        
+        copyPartNumAction.backgroundColor = UIColor(red: 0.250, green: 0.250, blue: 0.250, alpha: 1.00)
+        copyPartNumAction .hidesWhenSelected = true
+        updateAction.backgroundColor = UIColor(red: 0.100, green: 0.100, blue: 0.100, alpha: 1.00)
+        
+        copyPartInfoAction.image = UIImage(named: "copypartinfo")
+        copyPartNumAction.image = UIImage(named: "copypartnum")
+        updateAction.image = UIImage(named: "updatepart")
+        
+        
+        return [updateAction, copyPartNumAction, copyPartInfoAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+        var options = SwipeTableOptions()
+        //options.expansionStyle = .destructive
+        
+        //this will cause edit action for row action to fire
+        options.expansionStyle = .selection
+        //options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        
+        return options
+    }
+    
     //this is to ensure the row height stays the same
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //, was once keyword where
-        //making sure there are items in the table view.
-        if let objs = fetchedResultsContoller.fetchedObjects, objs.count > 0 {
-            let part = objs[indexPath.row]
-            //sending the part object to the Part VC
-            performSegue(withIdentifier: "PartsDetail", sender: part)
-        }
-    }
+    //Leave this so that I can implement if I want to just touch the row to update the part...
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        //, was once keyword where
+//        //making sure there are items in the table view.
+//        if let objs = fetchedResultsContoller.fetchedObjects, objs.count > 0 {
+//            let part = objs[indexPath.row]
+//            //sending the part object to the Part VC
+//            performSegue(withIdentifier: "PartsDetail", sender: part)
+//        }
+//    }
     
     //MARK: - Prepare for segue
     
@@ -251,17 +321,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //text changed on text bar
-        
         attemptFetch(filter: searchBar.text!)
-        
-     
-//        print(fetchedResultsContoller.fetchedObjects?.count ?? 0)
-//        
-//        for myPart in fetchedResultsContoller.fetchedObjects as [Part]! {
-//            print (myPart.partDescription!)
-//        }
-       
-        
+
     }
 
 }
