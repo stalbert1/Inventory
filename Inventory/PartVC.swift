@@ -21,6 +21,9 @@ class PartVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, MF
     
     @IBOutlet weak var pkrModelName: UIPickerView!
     
+    //added this to account for the keyboard and being able to see what your typing.
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     var partToEdit: Part?
     
     var modelNames = [String]()
@@ -30,6 +33,9 @@ class PartVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, MF
         pkrModelName.delegate = self
         pkrModelName.dataSource = self
         txtModelName.isHidden = true
+        
+        bottomConstraint.constant = 0
+        view.layoutIfNeeded()
         
         //fetch request all unique model names and build model names array
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Part")
@@ -56,6 +62,9 @@ class PartVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, MF
     
     //used this to dismiss the keyboard from uitextfield when pressing the view
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        bottomConstraint.constant = 0
+        view.layoutIfNeeded()
         self.view.endEditing(true)
     }
     
@@ -68,6 +77,9 @@ class PartVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, MF
             pkrModelName.isHidden = false
             txtModelName.isHidden = true
         }
+        
+        bottomConstraint.constant = 308
+        view.layoutIfNeeded()
         
     }
     

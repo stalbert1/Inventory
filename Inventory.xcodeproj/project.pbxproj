@@ -18,7 +18,7 @@
 		3443D11F1E588E820033F864 /* Part+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D11D1E588E820033F864 /* Part+CoreDataProperties.swift */; };
 		3443D1211E589CF30033F864 /* PartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443D1201E589CF30033F864 /* PartCell.swift */; };
 		59EC7CC0B38E4EC0E9485210 /* Pods_Inventory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1525B1785D5DB1A83257B6 /* Pods_Inventory.framework */; };
-		CF0A4276209937A4000EEDB4 /* partsInventory.csv in Resources */ = {isa = PBXBuildFile; fileRef = CF0A4275209937A4000EEDB4 /* partsInventory.csv */; };
+		CFF07F1C21E14AE4005408E6 /* partsInventory.csv in Resources */ = {isa = PBXBuildFile; fileRef = CFF07F1B21E14AE4005408E6 /* partsInventory.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +36,7 @@
 		3443D11D1E588E820033F864 /* Part+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Part+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3443D1201E589CF30033F864 /* PartCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartCell.swift; sourceTree = "<group>"; };
 		990BD0B6B357DA6C7547BCED /* Pods-Inventory.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inventory.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Inventory/Pods-Inventory.debug.xcconfig"; sourceTree = "<group>"; };
-		CF0A4275209937A4000EEDB4 /* partsInventory.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = partsInventory.csv; sourceTree = "<group>"; };
+		CFF07F1B21E14AE4005408E6 /* partsInventory.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = partsInventory.csv; sourceTree = "<group>"; };
 		E283DD147EB4E1B9380C0FC9 /* Pods-Inventory.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Inventory.release.xcconfig"; path = "Pods/Target Support Files/Pods-Inventory/Pods-Inventory.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,7 +87,7 @@
 				340E2BB31E569FBA002C4E1F /* AppDelegate.swift */,
 				340E2BBD1E569FBA002C4E1F /* Assets.xcassets */,
 				340E2BC21E569FBA002C4E1F /* Info.plist */,
-				CF0A4275209937A4000EEDB4 /* partsInventory.csv */,
+				CFF07F1B21E14AE4005408E6 /* partsInventory.csv */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 					340E2BAF1E569FBA002C4E1F = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = HJ3N23F853;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -201,7 +201,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF0A4276209937A4000EEDB4 /* partsInventory.csv in Resources */,
+				CFF07F1C21E14AE4005408E6 /* partsInventory.csv in Resources */,
 				340E2BC11E569FBA002C4E1F /* LaunchScreen.storyboard in Resources */,
 				340E2BBE1E569FBA002C4E1F /* Assets.xcassets in Resources */,
 				340E2BB91E569FBA002C4E1F /* Main.storyboard in Resources */,
@@ -340,7 +340,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 			};
 			name = Debug;
 		};
@@ -390,7 +390,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -405,8 +405,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ShaneTalbert.Inventory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -420,8 +419,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ShaneTalbert.Inventory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
